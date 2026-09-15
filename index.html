@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanveer Hussain (@vexornull) • Instagram Pro 5.0</title>
+    <title>Tanveer Hussain (@vexornull) • Instagram Pro 6.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,6 +43,10 @@
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes floatUp {
+            0% { transform: scale(0.3) translateY(0); opacity: 1; }
+            100% { transform: scale(1.4) translateY(-80px); opacity: 0; }
+        .animate-float { animation: floatUp 0.8s ease-out forwards; }
     </style>
 </head>
 <body class="min-h-screen select-none transition-colors duration-300 flex flex-col md:flex-row">
@@ -109,6 +113,12 @@
                     </div>
                     <span class="text-[11px] mt-1 truncate w-16 text-center">sarah_ui</span>
                 </div>
+                <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="openStoryViewer('alex_dev', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80')">
+                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover rounded-full border-2 border-black">
+                    </div>
+                    <span class="text-[11px] mt-1 truncate w-16 text-center">alex_dev</span>
+                </div>
             </div>
             <div id="home-posts-container" class="space-y-6 pt-4"></div>
         </div>
@@ -168,6 +178,28 @@
                 <div onclick="openAddAudioModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 transition px-3.5 py-2 rounded-full flex items-center space-x-1.5 text-xs cursor-pointer shrink-0">
                     <i class="fa-solid fa-plus text-xs"></i>
                     <span class="font-medium">Add track</span>
+                </div>
+            </div>
+
+            <!-- Highlights / Stories Archive Row -->
+            <div class="flex space-x-4 mb-6 overflow-x-auto no-scrollbar pb-2">
+                <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="showToast('Highlight: Web Dev')">
+                    <div class="w-16 h-16 rounded-full p-[2px] border border-[var(--border-col)] bg-[var(--card-bg)] flex items-center justify-center">
+                        <i class="fa-solid fa-code text-igblue text-xl"></i>
+                    </div>
+                    <span class="text-[11px] mt-1 text-center truncate w-16">Web Dev</span>
+                </div>
+                <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="showToast('Highlight: UI/UX')">
+                    <div class="w-16 h-16 rounded-full p-[2px] border border-[var(--border-col)] bg-[var(--card-bg)] flex items-center justify-center">
+                        <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-xl"></i>
+                    </div>
+                    <span class="text-[11px] mt-1 text-center truncate w-16">UI / UX</span>
+                </div>
+                <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="showToast('Highlight: Golf')">
+                    <div class="w-16 h-16 rounded-full p-[2px] border border-[var(--border-col)] bg-[var(--card-bg)] flex items-center justify-center">
+                        <i class="fa-solid fa-golf-ball-tee text-green-400 text-xl"></i>
+                    </div>
+                    <span class="text-[11px] mt-1 text-center truncate w-16">Golf</span>
                 </div>
             </div>
 
@@ -479,14 +511,14 @@
                 { id: 106, image: "https://images.unsplash.com/photo-1593111774642-a1309489f660?auto=format&fit=crop&w=600&q=80", topic: "Golf" }
             ],
             messages: [
-                { user: "sarah_ui", text: "Loved your recent web UI layout! 🔥", time: "2h", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
-                { user: "alex_dev", text: "Are you free for a quick collab?", time: "1d", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" }
+                { user: "sarah_ui", text: "Loved your recent web UI layout! 🔥", time: "2h", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80", history: [{sender: "sarah_ui", text: "Loved your recent web UI layout! 🔥"}] },
+                { user: "alex_dev", text: "Are you free for a quick collab?", time: "1d", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80", history: [{sender: "alex_dev", text: "Are you free for a quick collab?"}] }
             ],
             theme: 'dark'
         };
 
         function loadStorage() {
-            const saved = localStorage.getItem('vexornull_ig_pro_5');
+            const saved = localStorage.getItem('vexornull_ig_pro_6');
             if (saved) {
                 try { appData = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -500,7 +532,7 @@
         }
 
         function saveStorage() {
-            localStorage.setItem('vexornull_ig_pro_5', JSON.stringify(appData));
+            localStorage.setItem('vexornull_ig_pro_6', JSON.stringify(appData));
         }
 
         function toggleTheme() {
@@ -567,8 +599,11 @@
                         </div>
                         <i class="fa-solid fa-ellipsis text-xs cursor-pointer" onclick="openPostMenu()"></i>
                     </div>
-                    <div class="bg-black aspect-square cursor-pointer relative overflow-hidden flex items-center justify-center" onclick="openPostDetail(${p.id})">
+                    <div class="bg-black aspect-square cursor-pointer relative overflow-hidden flex items-center justify-center" ondblclick="triggerDoubleTapLike(${p.id}, event)" onclick="openPostDetail(${p.id})">
                         <img src="${p.images[0]}" class="w-full h-full object-cover">
+                        <div id="heart-anim-${p.id}" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 scale-50 transition">
+                            <i class="fa-solid fa-heart text-red-500 text-6xl drop-shadow-lg"></i>
+                        </div>
                         ${p.images.length > 1 ? '<span class="absolute top-3 right-3 bg-black/70 text-white text-[10px] px-2.5 py-1 rounded-full"><i class="fa-regular fa-clone"></i> ' + p.images.length + '</span>' : ''}
                     </div>
                     <div class="p-4 space-y-2.5">
@@ -578,7 +613,7 @@
                                 <button onclick="openPostDetail(${p.id})" class="hover:opacity-85"><i class="fa-regular fa-comment"></i></button>
                                 <button onclick="shareProfileLink()"><i class="fa-regular fa-paper-plane"></i></button>
                             </div>
-                            <button onclick="showToast('Post saved')"><i class="fa-regular fa-bookmark"></i></button>
+                            <button onclick="showToast('Post saved to bookmarks')"><i class="fa-regular fa-bookmark"></i></button>
                         </div>
                         <div class="font-semibold text-xs"><span>${p.likes}</span> likes</div>
                         <div class="text-xs"><span class="font-semibold mr-2">${appData.profile.username}</span>${p.caption}</div>
@@ -609,6 +644,24 @@
                 document.getElementById('reel-bg-img').src = reelPosts[0].images[0];
                 document.getElementById('reel-caption').innerText = reelPosts[0].caption;
             }
+        }
+
+        function triggerDoubleTapLike(postId, event) {
+            const post = appData.posts.find(p => p.id === postId);
+            post.likes++;
+            saveStorage();
+            renderAll();
+            
+            const heart = document.getElementById(`heart-anim-${postId}`);
+            if(heart) {
+                heart.classList.remove('opacity-0', 'scale-50');
+                heart.classList.add('opacity-100', 'scale-125', 'animate-float');
+                setTimeout(() => {
+                    heart.classList.remove('opacity-100', 'scale-125', 'animate-float');
+                    heart.classList.add('opacity-0', 'scale-50');
+                }, 800);
+            }
+            showToast("Liked post!");
         }
 
         function renderExploreGrid(items) {
@@ -839,9 +892,9 @@
                     <h3 class="font-bold text-sm">Direct Messages (Inbox)</h3>
                     <button onclick="closeModal()"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
-                <div class="p-4 max-h-[60vh] overflow-y-auto space-y-4">
-                    ${appData.messages.map(m => `
-                        <div class="flex items-center space-x-3 cursor-pointer p-2 rounded-xl hover:bg-white/5 transition" onclick="showToast('Active conversation with ${m.user}')">
+                <div class="p-4 max-h-[60vh] overflow-y-auto space-y-4" id="dm-inbox-list">
+                    ${appData.messages.map((m, idx) => `
+                        <div class="flex items-center space-x-3 cursor-pointer p-2 rounded-xl hover:bg-white/5 transition" onclick="openChatThread(${idx})">
                             <img src="${m.avatar}" class="w-12 h-12 rounded-full object-cover">
                             <div class="flex-1">
                                 <div class="font-semibold text-xs">${m.user}</div>
@@ -852,6 +905,44 @@
                 </div>
             `;
             modal.classList.remove('hidden');
+        }
+
+        function openChatThread(idx) {
+            const chat = appData.messages[idx];
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <div class="p-3 border-b border-[var(--border-col)] flex items-center justify-between">
+                    <div class="flex items-center space-x-2.5 cursor-pointer" onclick="openDirectMessagesDrawer()">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <img src="${chat.avatar}" class="w-8 h-8 rounded-full object-cover">
+                        <span class="font-bold text-sm">${chat.user}</span>
+                    </div>
+                    <button onclick="closeModal()"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div class="p-4 h-[50vh] overflow-y-auto space-y-3 flex flex-col" id="chat-messages-box">
+                    ${chat.history.map(h => `
+                        <div class="max-w-[75%] px-3.5 py-2 rounded-2xl text-xs ${h.sender === 'me' ? 'ml-auto bg-igblue text-white' : 'bg-[var(--border-col)] text-white'}">
+                            ${h.text}
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="p-3 border-t border-[var(--border-col)] flex items-center space-x-2">
+                    <input type="text" id="chat-input-msg" placeholder="Message ${chat.user}..." class="bg-[var(--border-col)] text-xs flex-1 px-4 py-2.5 rounded-full focus:outline-none">
+                    <button onclick="sendChatMessage(${idx})" class="text-igblue font-bold text-xs px-3">Send</button>
+                </div>
+            `;
+        }
+
+        function sendChatMessage(idx) {
+            const input = document.getElementById('chat-input-msg');
+            const text = input.value.trim();
+            if(!text) return;
+            appData.messages[idx].history.push({sender: 'me', text: text});
+            appData.messages[idx].text = text;
+            appData.messages[idx].time = 'Just now';
+            saveStorage();
+            openChatThread(idx);
+            showToast("Message sent!");
         }
 
         function openRearrangeGridModal() {
@@ -895,12 +986,29 @@
             const modal = document.getElementById('app-modal');
             const content = document.getElementById('modal-content');
             content.innerHTML = `
-                <div class="relative h-[70vh] bg-black flex items-center justify-center">
-                    <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                        <span class="font-semibold text-sm text-white">${title}</span>
-                        <button onclick="closeModal()" class="text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+                <div class="relative h-[75vh] bg-black flex flex-col justify-between p-4">
+                    <div class="space-y-2 z-10">
+                        <div class="w-full bg-white/30 h-1 rounded-full overflow-hidden">
+                            <div class="bg-white h-full w-full animate-pulse"></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="${imageUrl}" class="w-8 h-8 rounded-full object-cover border border-white">
+                                <span class="font-semibold text-xs text-white">${title}</span>
+                            </div>
+                            <button onclick="closeModal()" class="text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
                     </div>
-                    <img src="${imageUrl}" class="w-full h-full object-cover">
+                    
+                    <div class="absolute inset-0 z-0 flex items-center justify-center pt-10">
+                        <img src="${imageUrl}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
+                    </div>
+
+                    <div class="relative z-10 flex items-center space-x-2 pt-4">
+                        <input type="text" placeholder="Reply to ${title}..." class="bg-white/20 text-white placeholder-white/70 text-xs flex-1 px-4 py-2.5 rounded-full focus:outline-none backdrop-blur-md">
+                        <button onclick="showToast('Story reply sent!')" class="text-white font-bold text-xs px-3">Send</button>
+                    </div>
                 </div>
             `;
             modal.classList.remove('hidden');
