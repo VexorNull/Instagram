@@ -16,14 +16,14 @@
     <meta property="og:type" content="profile">
     <meta property="og:title" content="Tanveer Hussain (@vexornull) • Web Designer & Frontend Dev">
     <meta property="og:description" content="Explore the creative portfolio and interactive web projects of Tanveer Hussain.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80">
+    <meta property="og:image" content="https://drive.google.com/uc?export=view&id=1NzqmZp796ksKZrtpuMabgqpFXTGV3YIR">
     <meta property="og:url" content="https://vexornull.github.io/">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tanveer Hussain (@vexornull) • Frontend Dev">
     <meta name="twitter:description" content="Frontend Developer and Web Designer from Karachi, Pakistan.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80">
+    <meta name="twitter:image" content="https://drive.google.com/uc?export=view&id=1NzqmZp796ksKZrtpuMabgqpFXTGV3YIR">
 
     <!-- Schema.org JSON-LD Structured Data for Search Engines -->
     <script type="application/ld+json">
@@ -195,7 +195,6 @@
                         <div class="flex items-center gap-2 flex-wrap">
                             <h1 class="font-bold text-base md:text-xl" id="profile-name">Tanveer Hussain</h1>
                             <span class="text-igblue text-xs md:text-sm" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
-                            <span id="ai-creator-badge" class="bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded font-normal">AI Creator</span>
                         </div>
                     </div>
 
@@ -480,10 +479,6 @@
                     <label class="text-xs text-gray-400 uppercase font-semibold">First Note / Status</label>
                     <input type="text" id="input-note" class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-lg p-3 text-sm mt-1 focus:outline-none focus:border-igblue">
                 </div>
-                <div class="flex items-center justify-between pt-2">
-                    <span class="text-xs text-gray-400 uppercase font-semibold">Show AI Creator Label</span>
-                    <input type="checkbox" id="input-ai-badge" class="w-4 h-4 accent-igblue cursor-pointer">
-                </div>
             </div>
         </div>
 
@@ -545,10 +540,9 @@
                 bio: "Web Designer & Frontend Dev\nKarachi, Pakistan",
                 note: "First note of the week...",
                 audio: "Jhol · Revel",
-                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+                avatar: "https://drive.google.com/uc?export=view&id=1NzqmZp796ksKZrtpuMabgqpFXTGV3YIR",
                 followers: 482,
-                following: 160,
-                showAiBadge: true
+                following: 160
             },
             posts: [
                 {
@@ -609,7 +603,13 @@
         function loadStorage() {
             const saved = localStorage.getItem('vexornull_ig_pro_6');
             if (saved) {
-                try { appData = JSON.parse(saved); } catch (e) { console.error(e); }
+                try { 
+                    appData = JSON.parse(saved); 
+                    // Keep updated drive link profile avatar intact if loaded from older cache
+                    if (!appData.profile.avatar || appData.profile.avatar.includes('unsplash')) {
+                        appData.profile.avatar = "https://drive.google.com/uc?export=view&id=1NzqmZp796ksKZrtpuMabgqpFXTGV3YIR";
+                    }
+                } catch (e) { console.error(e); }
             }
             if (appData.theme === 'light') {
                 document.documentElement.classList.remove('dark');
@@ -668,19 +668,11 @@
             document.getElementById('reel-username').innerText = appData.profile.username;
             document.getElementById('reel-audio-title').innerText = appData.profile.audio;
 
-            const aiBadgeEl = document.getElementById('ai-creator-badge');
-            if(appData.profile.showAiBadge) {
-                aiBadgeEl.classList.remove('hidden');
-            } else {
-                aiBadgeEl.classList.add('hidden');
-            }
-
             document.getElementById('input-name').value = appData.profile.name;
             document.getElementById('input-username').value = appData.profile.username;
             document.getElementById('input-bio').value = appData.profile.bio;
             document.getElementById('input-audio').value = appData.profile.audio;
             document.getElementById('input-note').value = appData.profile.note;
-            document.getElementById('input-ai-badge').checked = appData.profile.showAiBadge;
 
             // Render Home Stream
             const homeContainer = document.getElementById('home-posts-container');
@@ -920,7 +912,6 @@
             showToast("Comment posted!");
         }
 
-        // ================= DELETE POST FUNCTION =================
         function deletePost(postId) {
             if (confirm("Are you sure you want to delete this post?")) {
                 appData.posts = appData.posts.filter(p => p.id !== postId);
@@ -958,7 +949,6 @@
             appData.profile.bio = document.getElementById('input-bio').value;
             appData.profile.audio = document.getElementById('input-audio').value;
             appData.profile.note = document.getElementById('input-note').value;
-            appData.profile.showAiBadge = document.getElementById('input-ai-badge').checked;
             saveStorage();
             renderAll();
             showToast("Profile successfully updated!");
