@@ -42,7 +42,7 @@
         },
         "sameAs": [
           "https://github.com/VexorNull",
-          "https://instagram.com/Official.Tanveer.70"
+          "https://instagram.com/vexornull"
         ]
       }
     }
@@ -508,7 +508,7 @@
     <!-- Firebase SDK Modular Imports & Configuration Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         // Your exact web app's Firebase configuration
         const firebaseConfig = {
@@ -525,11 +525,29 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Expose Firebase tools globally for legacy handlers if needed
+        // Expose Firebase tools globally for legacy handlers
         window.firebaseDb = db;
         window.firebaseRef = ref;
         window.firebaseSet = set;
+        window.firebaseGet = get;
+        window.firebaseChild = child;
         window.firebaseOnValue = onValue;
+
+        // Auto sync profile from Firebase on start
+        window.syncProfileFromFirebase = function() {
+            const profileRef = ref(db, 'profile');
+            onValue(profileRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    appData.profile = { ...appData.profile, ...data };
+                    saveStorage();
+                    renderAll();
+                }
+            });
+        };
+        
+        // Trigger sync
+        setTimeout(() => { if(window.syncProfileFromFirebase) window.syncProfileFromFirebase(); }, 500);
     </script>
 
     <script>
@@ -942,15 +960,29 @@
             showToast("Switched to next reel");
         }
 
-        function saveProfileEdits() {
+        // Updated function to sync/save profile data (including profile picture) to Firebase Realtime Database
+        async function saveProfileEdits() {
             appData.profile.name = document.getElementById('input-name').value;
             appData.profile.username = document.getElementById('input-username').value;
             appData.profile.bio = document.getElementById('input-bio').value;
             appData.profile.audio = document.getElementById('input-audio').value;
             appData.profile.note = document.getElementById('input-note').value;
+            
             saveStorage();
             renderAll();
-            showToast("Profile successfully updated!");
+
+            // Save to Firebase Database
+            if (window.firebaseDb && window.firebaseRef && window.firebaseSet) {
+                try {
+                    await window.firebaseSet(window.firebaseRef(window.firebaseDb, 'profile'), appData.profile);
+                    showToast("Profile & Photo saved to Firebase!");
+                } catch (err) {
+                    console.error("Firebase save error:", err);
+                    showToast("Profile saved locally (Firebase sync error)");
+                }
+            } else {
+                showToast("Profile successfully updated!");
+            }
             switchView('profile');
         }
 
@@ -967,7 +999,7 @@
                     document.getElementById('edit-avatar-preview').src = appData.profile.avatar;
                     saveStorage();
                     renderAll();
-                    showToast("Profile picture updated!");
+                    showToast("Profile picture selected! Click 'Done' to sync with Firebase.");
                 };
                 reader.readAsDataURL(file);
             }
