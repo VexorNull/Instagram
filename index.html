@@ -3,7 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanveer Hussain (@vexornull) • Instagram Pro 6.1</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Tanveer Hussain (@vexornull) • Frontend Dev & Web Designer Portfolio</title>
+    <meta name="description" content="Official portfolio and web showcase of Tanveer Hussain (vexornull) — Frontend Developer and Web Designer based in Karachi, Pakistan. Explore custom web projects, UI/UX layouts, and interactive applications.">
+    <meta name="keywords" content="Tanveer Hussain, vexornull, Frontend Developer, Web Designer, Karachi Developer, Portfolio, Instagram Pro Web App, Web Development Pakistan">
+    <meta name="author" content="Tanveer Hussain">
+    <link rel="canonical" href="https://vexornull.github.io/">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Tanveer Hussain (@vexornull) • Web Designer & Frontend Dev">
+    <meta property="og:description" content="Explore the creative portfolio and interactive web projects of Tanveer Hussain.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80">
+    <meta property="og:url" content="https://vexornull.github.io/">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tanveer Hussain (@vexornull) • Frontend Dev">
+    <meta name="twitter:description" content="Frontend Developer and Web Designer from Karachi, Pakistan.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80">
+
+    <!-- Schema.org JSON-LD Structured Data for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Tanveer Hussain",
+        "alternateName": "vexornull",
+        "jobTitle": "Frontend Developer & Web Designer",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Karachi",
+          "addressCountry": "Pakistan"
+        },
+        "sameAs": [
+          "https://github.com/VexorNull",
+          "https://instagram.com/Official.Tanveer.70"
+        ]
+      }
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -66,7 +109,7 @@
                 <a href="#" onclick="switchView('notifications')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-regular fa-heart text-xl w-6"></i><span>Notifications</span></a>
                 <a href="#" onclick="openCreatePostModal()" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-regular fa-square-plus text-xl w-6"></i><span>Create</span></a>
                 <a href="#" onclick="switchView('profile')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition">
-                    <img id="sidebar-avatar" src="" class="w-6 h-6 rounded-full object-cover">
+                    <img id="sidebar-avatar" src="" alt="Tanveer Hussain Profile Avatar" class="w-6 h-6 rounded-full object-cover">
                     <span id="sidebar-username">vexornull</span>
                 </a>
             </nav>
@@ -103,20 +146,20 @@
             <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-4 border-b border-[var(--border-col)]">
                 <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="openStoryUploaderModal()">
                     <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 relative">
-                        <img src="" id="home-story-avatar" class="w-full h-full object-cover rounded-full border-2 border-black">
+                        <img src="" id="home-story-avatar" alt="Story Avatar" class="w-full h-full object-cover rounded-full border-2 border-black">
                         <div class="absolute bottom-0 right-0 bg-[#0095f6] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs border border-black font-bold">+</div>
                     </div>
                     <span class="text-[11px] mt-1 truncate w-16 text-center">Your story</span>
                 </div>
                 <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="openStoryViewer('sarah_ui', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80')">
                     <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover rounded-full border-2 border-black">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Sarah UI" class="w-full h-full object-cover rounded-full border-2 border-black">
                     </div>
                     <span class="text-[11px] mt-1 truncate w-16 text-center">sarah_ui</span>
                 </div>
                 <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="openStoryViewer('alex_dev', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80')">
                     <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
-                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover rounded-full border-2 border-black">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" alt="Alex Dev" class="w-full h-full object-cover rounded-full border-2 border-black">
                     </div>
                     <span class="text-[11px] mt-1 truncate w-16 text-center">alex_dev</span>
                 </div>
@@ -135,12 +178,12 @@
                 </div>
             </div>
 
-            <!-- Profile Header Row (Properly aligned avatar on left, details on right) -->
+            <!-- Profile Header Row -->
             <div class="flex items-center space-x-6 md:space-x-14 mb-6">
                 <!-- Avatar Column -->
                 <div class="relative cursor-pointer shrink-0" onclick="openStoryViewer('Tanveer Hussain', appData.profile.avatar)">
                     <div class="w-20 h-20 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
-                        <img id="profile-avatar" src="" alt="Tanveer Hussain" class="w-full h-full object-cover rounded-full border-2 border-black">
+                        <img id="profile-avatar" src="" alt="Tanveer Hussain Profile Picture" class="w-full h-full object-cover rounded-full border-2 border-black">
                     </div>
                     <div class="absolute bottom-1 right-1 bg-[#0095f6] text-white rounded-full w-6 h-6 md:w-7 md:h-7 flex items-center justify-center text-xs md:text-sm border-2 border-black font-bold">+</div>
                 </div>
@@ -289,14 +332,14 @@
                 </div>
 
                 <div class="absolute inset-0 z-0">
-                    <img id="reel-bg-img" src="" class="w-full h-full object-cover">
+                    <img id="reel-bg-img" src="" alt="Reels Background" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40"></div>
                 </div>
 
                 <div class="relative z-10 mt-auto flex items-end justify-between pb-4">
                     <div class="space-y-2 max-w-[78%]">
                         <div class="flex items-center space-x-2">
-                            <img id="reel-user-avatar" src="" class="w-8 h-8 rounded-full border border-white object-cover">
+                            <img id="reel-user-avatar" src="" alt="Reel User Avatar" class="w-8 h-8 rounded-full border border-white object-cover">
                             <span class="font-bold text-sm text-white" id="reel-username">vexornull</span>
                             <button onclick="showToast('Following!')" class="border border-white/40 px-3 py-1 rounded-full text-xs text-white font-semibold hover:bg-white/10">Follow</button>
                         </div>
@@ -368,7 +411,7 @@
             <div class="space-y-4 py-2">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Sarah UI Avatar" class="w-10 h-10 rounded-full object-cover">
                         <div class="text-xs">
                             <span class="font-semibold">sarah_ui</span> liked your post.
                             <div class="text-gray-500 text-[10px] mt-0.5">2h ago</div>
@@ -377,7 +420,7 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
-                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" alt="Alex Dev Avatar" class="w-10 h-10 rounded-full object-cover">
                         <div class="text-xs">
                             <span class="font-semibold">alex_dev</span> mentioned you in a comment.
                             <div class="text-gray-500 text-[10px] mt-0.5">5h ago</div>
@@ -409,7 +452,7 @@
             
             <div class="py-6 flex flex-col items-center">
                 <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-[var(--border-col)] relative group cursor-pointer" onclick="triggerAvatarUpload()">
-                    <img id="edit-avatar-preview" src="" class="w-full h-full object-cover">
+                    <img id="edit-avatar-preview" src="" alt="Edit Profile Preview" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-xs font-semibold text-white">Change</div>
                 </div>
                 <input type="file" id="avatar-file-input" accept="image/*" class="hidden" onchange="handleAvatarFile(event)">
@@ -452,7 +495,7 @@
         <a href="#" onclick="switchView('reels-feed')" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-clapperboard"></i></a>
         <a href="#" onclick="openCreatePostModal()" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-regular fa-square-plus"></i></a>
         <div class="w-7 h-7 rounded-full overflow-hidden border-2 border-white cursor-pointer" onclick="switchView('profile')">
-            <img id="nav-avatar" src="" class="w-full h-full object-cover">
+            <img id="nav-avatar" src="" alt="Mobile Bottom Navbar Avatar" class="w-full h-full object-cover">
         </div>
     </nav>
 
@@ -617,13 +660,13 @@
                 <div class="bg-[var(--card-bg)] border border-[var(--border-col)] mb-6 rounded-xl overflow-hidden">
                     <div class="flex items-center justify-between px-4 py-3">
                         <div class="flex items-center space-x-3">
-                            <img src="${appData.profile.avatar}" class="w-8 h-8 rounded-full object-cover border border-[var(--border-col)]">
+                            <img src="${appData.profile.avatar}" alt="User Avatar" class="w-8 h-8 rounded-full object-cover border border-[var(--border-col)]">
                             <span class="font-semibold text-xs">${appData.profile.username}</span>
                         </div>
                         <i class="fa-solid fa-ellipsis text-xs cursor-pointer" onclick="openPostMenu()"></i>
                     </div>
                     <div class="bg-black aspect-square cursor-pointer relative overflow-hidden flex items-center justify-center" ondblclick="triggerDoubleTapLike(${p.id}, event)" onclick="openPostDetail(${p.id})">
-                        <img src="${p.images[0]}" class="w-full h-full object-cover">
+                        <img src="${p.images[0]}" alt="Post Image" class="w-full h-full object-cover">
                         <div id="heart-anim-${p.id}" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 scale-50 transition">
                             <i class="fa-solid fa-heart text-red-500 text-6xl drop-shadow-lg"></i>
                         </div>
@@ -650,7 +693,7 @@
             const grid = document.getElementById('content-grid');
             grid.innerHTML = appData.posts.map(p => `
                 <div class="relative aspect-square bg-[var(--card-bg)] cursor-pointer group overflow-hidden rounded-md" onclick="openPostDetail(${p.id})">
-                    <img src="${p.images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <img src="${p.images[0]}" alt="Profile Grid Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                     ${p.isReel ? `<div class="absolute top-2 right-2 text-white text-xs drop-shadow"><i class="fa-solid fa-play"></i></div>` : ''}
                     ${p.images.length > 1 ? `<div class="absolute top-2 right-2 text-white text-xs drop-shadow"><i class="fa-regular fa-clone"></i></div>` : ''}
                 </div>
@@ -691,7 +734,7 @@
             const expGrid = document.getElementById('explore-grid');
             expGrid.innerHTML = items.map(item => `
                 <div class="relative aspect-square bg-[var(--card-bg)] cursor-pointer group overflow-hidden rounded-md" onclick="showToast('Explore item selected')">
-                    <img src="${item.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <img src="${item.image}" alt="Explore Grid Item" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                     <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs font-semibold transition">
                         <i class="fa-solid fa-heart mr-1"></i> 124
                     </div>
@@ -767,7 +810,7 @@
             
             let carouselHtml = `
                 <div class="relative bg-black aspect-square flex items-center justify-center overflow-hidden" id="carousel-box-${postId}">
-                    <img src="${post.images[0]}" class="w-full h-full object-cover" id="carousel-img-${postId}">
+                    <img src="${post.images[0]}" alt="Post Slide" class="w-full h-full object-cover" id="carousel-img-${postId}">
                     ${post.images.length > 1 ? `
                         <button onclick="prevSlide(${postId})" class="absolute left-2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center text-xs"><i class="fa-solid fa-chevron-left"></i></button>
                         <button onclick="nextSlide(${postId})" class="absolute right-2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center text-xs"><i class="fa-solid fa-chevron-right"></i></button>
@@ -778,7 +821,7 @@
             container.innerHTML = `
                 <div class="flex items-center justify-between p-3 border-b border-[var(--border-col)]">
                     <div class="flex items-center space-x-2.5">
-                        <img src="${appData.profile.avatar}" class="w-8 h-8 rounded-full object-cover">
+                        <img src="${appData.profile.avatar}" alt="Avatar" class="w-8 h-8 rounded-full object-cover">
                         <span class="font-semibold text-sm">${appData.profile.username}</span>
                     </div>
                 </div>
@@ -801,7 +844,7 @@
                                 <div class="flex items-start justify-between">
                                     <div>
                                         <span class="font-semibold mr-2">${c.user}</span>${c.text}
-                                        ${c.photo ? `<div class="mt-1"><img src="${c.photo}" class="w-20 h-20 rounded object-cover border"></div>` : ''}
+                                        ${c.photo ? `<div class="mt-1"><img src="${c.photo}" alt="Comment Image" class="w-20 h-20 rounded object-cover border"></div>` : ''}
                                     </div>
                                 </div>
                             `).join('')
@@ -918,7 +961,7 @@
                 <div class="p-4 max-h-[60vh] overflow-y-auto space-y-4" id="dm-inbox-list">
                     ${appData.messages.map((m, idx) => `
                         <div class="flex items-center space-x-3 cursor-pointer p-2 rounded-xl hover:bg-white/5 transition" onclick="openChatThread(${idx})">
-                            <img src="${m.avatar}" class="w-12 h-12 rounded-full object-cover">
+                            <img src="${m.avatar}" alt="Chat Avatar" class="w-12 h-12 rounded-full object-cover">
                             <div class="flex-1">
                                 <div class="font-semibold text-xs">${m.user}</div>
                                 <div class="text-xs text-gray-400 truncate">${m.text} · ${m.time}</div>
@@ -937,7 +980,7 @@
                 <div class="p-3 border-b border-[var(--border-col)] flex items-center justify-between">
                     <div class="flex items-center space-x-2.5 cursor-pointer" onclick="openDirectMessagesDrawer()">
                         <i class="fa-solid fa-arrow-left"></i>
-                        <img src="${chat.avatar}" class="w-8 h-8 rounded-full object-cover">
+                        <img src="${chat.avatar}" alt="Active Chat Avatar" class="w-8 h-8 rounded-full object-cover">
                         <span class="font-bold text-sm">${chat.user}</span>
                     </div>
                     <button onclick="closeModal()"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -981,7 +1024,7 @@
                     <div class="grid grid-cols-3 gap-2">
                         ${appData.posts.map((p, idx) => `
                             <div class="relative aspect-square rounded-lg overflow-hidden border border-[var(--border-col)] cursor-pointer group" onclick="shiftPostIndex(${idx})">
-                                <img src="${p.images[0]}" class="w-full h-full object-cover">
+                                <img src="${p.images[0]}" alt="Rearrange Item" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs font-bold transition">Shift</div>
                             </div>
                         `).join('')}
@@ -1016,7 +1059,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
-                                <img src="${imageUrl}" class="w-8 h-8 rounded-full object-cover border border-white">
+                                <img src="${imageUrl}" alt="Story Viewer" class="w-8 h-8 rounded-full object-cover border border-white">
                                 <span class="font-semibold text-xs text-white">${title}</span>
                             </div>
                             <button onclick="closeModal()" class="text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
@@ -1024,7 +1067,7 @@
                     </div>
                     
                     <div class="absolute inset-0 z-0 flex items-center justify-center pt-10">
-                        <img src="${imageUrl}" class="w-full h-full object-cover">
+                        <img src="${imageUrl}" alt="Story Media" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
                     </div>
 
@@ -1108,7 +1151,7 @@
             if(!strip) return;
             strip.innerHTML = tempUploadedImages.map((img, idx) => `
                 <div class="relative w-14 h-14 shrink-0 rounded-lg overflow-hidden border border-[var(--border-col)]">
-                    <img src="${img}" class="w-full h-full object-cover">
+                    <img src="${img}" alt="Preview" class="w-full h-full object-cover">
                 </div>
             `).join('');
         }
