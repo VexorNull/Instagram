@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanveer Hussain (@vexornull) • Instagram Pro 3.0</title>
+    <title>Tanveer Hussain (@vexornull) • Instagram Pro 4.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -45,40 +45,57 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen pb-20 select-none transition-colors duration-300">
+<body class="min-h-screen select-none transition-colors duration-300 flex flex-col md:flex-row">
 
-    <!-- Top Navigation Bar -->
-    <header class="sticky top-0 z-40 bg-[var(--bg-main)]/95 backdrop-blur-md border-b border-[var(--border-col)] px-4 py-2.5 flex items-center justify-between max-w-md md:max-w-2xl mx-auto">
+    <!-- Desktop Left Sidebar Navigation -->
+    <aside class="hidden md:flex flex-col justify-between w-64 border-r border-[var(--border-col)] p-4 fixed h-screen z-40 bg-[var(--bg-main)]">
+        <div class="space-y-6">
+            <div class="flex items-center space-x-2 px-3 py-2 cursor-pointer" onclick="switchView('profile')">
+                <span class="font-bold text-xl tracking-tight italic font-serif">Instagram</span>
+            </div>
+            <nav class="space-y-2 text-sm font-medium">
+                <a href="#" onclick="switchView('home')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-solid fa-house text-xl w-6"></i><span>Home</span></a>
+                <a href="#" onclick="switchView('explore')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-solid fa-magnifying-glass text-xl w-6"></i><span>Search</span></a>
+                <a href="#" onclick="switchView('reels-feed')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-solid fa-clapperboard text-xl w-6"></i><span>Reels</span></a>
+                <a href="#" onclick="openDirectMessagesDrawer()" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-regular fa-paper-plane text-xl w-6"></i><span>Messages</span></a>
+                <a href="#" onclick="switchView('notifications')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-regular fa-heart text-xl w-6"></i><span>Notifications</span></a>
+                <a href="#" onclick="openCreatePostModal()" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-regular fa-square-plus text-xl w-6"></i><span>Create</span></a>
+                <a href="#" onclick="switchView('profile')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition">
+                    <img id="sidebar-avatar" src="" class="w-6 h-6 rounded-full object-cover">
+                    <span id="sidebar-username">vexornull</span>
+                </a>
+            </nav>
+        </div>
+        <div class="space-y-2">
+            <button onclick="toggleTheme()" class="w-full flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition text-sm font-medium">
+                <i id="desktop-theme-icon" class="fa-solid fa-moon text-xl w-6"></i><span>Toggle Theme</span>
+            </button>
+            <button onclick="openMenuModal()" class="w-full flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition text-sm font-medium">
+                <i class="fa-solid fa-bars text-xl w-6"></i><span>More</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Top Navigation Bar -->
+    <header class="md:hidden sticky top-0 z-40 bg-[var(--bg-main)]/95 backdrop-blur-md border-b border-[var(--border-col)] px-4 py-2.5 flex items-center justify-between w-full">
         <div class="flex items-center space-x-1 cursor-pointer" onclick="switchView('profile')">
             <span class="text-xs text-gray-400 font-medium">@</span>
             <span class="font-bold text-base tracking-tight" id="header-username">vexornull</span>
             <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
         </div>
         <div class="flex items-center space-x-4 text-xl">
-            <div class="relative cursor-pointer" onclick="toggleTheme()" title="Toggle Theme">
-                <i id="theme-icon" class="fa-solid fa-moon text-base hover:text-igblue transition"></i>
-            </div>
-            <div class="relative cursor-pointer" onclick="openAlgorithmControlModal()" title="Your Algorithm">
-                <i class="fa-solid fa-sliders text-base text-igblue"></i>
-            </div>
-            <div class="relative cursor-pointer" onclick="switchView('notifications')">
-                <i class="fa-regular fa-heart hover:text-igblue transition"></i>
-                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">3</span>
-            </div>
-            <div class="relative cursor-pointer" onclick="openDirectMessagesDrawer()">
-                <i class="fa-regular fa-paper-plane hover:text-igblue transition"></i>
-                <span class="absolute -top-1 -right-1 bg-igblue text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">5</span>
-            </div>
-            <i class="fa-solid fa-bars cursor-pointer hover:text-igblue transition" onclick="openMenuModal()"></i>
+            <div class="relative cursor-pointer" onclick="toggleTheme()"><i id="theme-icon" class="fa-solid fa-moon text-base hover:text-igblue transition"></i></div>
+            <div class="relative cursor-pointer" onclick="switchView('notifications')"><i class="fa-regular fa-heart hover:text-igblue transition"></i></div>
+            <div class="relative cursor-pointer" onclick="openDirectMessagesDrawer()"><i class="fa-regular fa-paper-plane hover:text-igblue transition"></i></div>
         </div>
     </header>
 
-    <main class="max-w-md md:max-w-2xl mx-auto min-h-[85vh]">
+    <!-- Main Content Area (Fluid / Responsive Container) -->
+    <main class="flex-1 md:ml-64 min-h-screen pb-24 md:pb-12 px-2 md:px-12 max-w-4xl mx-auto">
 
         <!-- ================= VIEW 1: HOME FEED ================= -->
-        <div id="view-home" class="app-view hidden px-0 pt-2 pb-16">
-            <!-- Stories Tray -->
-            <div class="flex space-x-3 overflow-x-auto no-scrollbar px-3 pb-3 border-b border-[var(--border-col)]">
+        <div id="view-home" class="app-view hidden py-4 max-w-xl mx-auto">
+            <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-4 border-b border-[var(--border-col)]">
                 <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="openStoryUploaderModal()">
                     <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 relative">
                         <img src="" id="home-story-avatar" class="w-full h-full object-cover rounded-full border-2 border-black">
@@ -92,136 +109,98 @@
                     </div>
                     <span class="text-[11px] mt-1 truncate w-16 text-center">sarah_ui</span>
                 </div>
-                <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="openStoryViewer('alex_dev', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80')">
-                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
-                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover rounded-full border-2 border-black">
-                    </div>
-                    <span class="text-[11px] mt-1 truncate w-16 text-center">alex_dev</span>
-                </div>
             </div>
-
-            <!-- Home Posts Stream -->
-            <div id="home-posts-container" class="space-y-4 pt-3"></div>
+            <div id="home-posts-container" class="space-y-6 pt-4"></div>
         </div>
 
         <!-- ================= VIEW 2: PROFILE MAIN ================= -->
-        <div id="view-profile" class="app-view px-3 pt-3 pb-16">
+        <div id="view-profile" class="app-view py-6 max-w-3xl mx-auto">
             
             <!-- First Note Bubble -->
-            <div class="mb-3 relative w-40 cursor-pointer" onclick="openEditNoteModal()">
-                <div class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs px-3 py-1.5 rounded-2xl text-center shadow-md relative inline-block whitespace-nowrap">
+            <div class="mb-4 relative w-44 cursor-pointer" onclick="openEditNoteModal()">
+                <div class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs px-3.5 py-2 rounded-2xl text-center shadow-md relative inline-block whitespace-nowrap">
                     <span id="profile-note-text">First note of the week...</span>
                     <div class="absolute -bottom-1 left-4 w-2 h-2 bg-[var(--card-bg)] rotate-45 border-r border-b border-[var(--border-col)]"></div>
                 </div>
             </div>
 
-            <!-- Profile Info Row -->
-            <div class="flex items-center justify-between mb-4">
-                <div class="relative cursor-pointer" onclick="openStoryViewer('Tanveer Hussain', appData.profile.avatar)">
-                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
+            <!-- Profile Header Row (Optimized for Desktop & Mobile) -->
+            <div class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-12 mb-6">
+                <div class="relative cursor-pointer mx-auto md:mx-0" onclick="openStoryViewer('Tanveer Hussain', appData.profile.avatar)">
+                    <div class="w-24 h-24 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
                         <img id="profile-avatar" src="" alt="Tanveer Hussain" class="w-full h-full object-cover rounded-full border-2 border-black">
                     </div>
-                    <div class="absolute bottom-0 right-0 bg-[#0095f6] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs border-2 border-black font-bold">+</div>
+                    <div class="absolute bottom-1 right-1 bg-[#0095f6] text-white rounded-full w-7 h-7 flex items-center justify-center text-sm border-2 border-black font-bold">+</div>
                 </div>
 
-                <div class="flex justify-around flex-1 ml-6 text-center">
-                    <div class="cursor-pointer" onclick="showToast('Total posts published')">
-                        <div class="font-bold text-base md:text-lg" id="stat-posts-count">5</div>
-                        <div class="text-xs text-iggray">posts</div>
+                <div class="flex-1 w-full space-y-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="font-bold text-lg md:text-xl" id="profile-name">Tanveer Hussain</h1>
+                            <span class="text-igblue text-sm" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
+                            <span id="ai-creator-badge" class="bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded font-normal">AI Creator</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="switchView('edit-profile')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-4 rounded-lg">Edit profile</button>
+                            <button onclick="shareProfileLink()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-4 rounded-lg">Share profile</button>
+                            <button onclick="openRearrangeGridModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-4 rounded-lg text-igblue">Rearrange Grid</button>
+                        </div>
                     </div>
-                    <div class="cursor-pointer" onclick="openUserListModal('followers')">
-                        <div class="font-bold text-base md:text-lg" id="stat-followers">482</div>
-                        <div class="text-xs text-iggray">followers</div>
+
+                    <div class="flex space-x-8 text-sm">
+                        <div><span class="font-bold" id="stat-posts-count">5</span> posts</div>
+                        <div class="cursor-pointer" onclick="openUserListModal('followers')"><span class="font-bold" id="stat-followers">482</span> followers</div>
+                        <div class="cursor-pointer" onclick="openUserListModal('following')"><span class="font-bold" id="stat-following">160</span> following</div>
                     </div>
-                    <div class="cursor-pointer" onclick="openUserListModal('following')">
-                        <div class="font-bold text-base md:text-lg" id="stat-following">160</div>
-                        <div class="text-xs text-iggray">following</div>
+
+                    <div>
+                        <p class="text-xs md:text-sm whitespace-pre-line text-gray-300" id="profile-profession-bio">Web Designer & Frontend Dev\nKarachi, Pakistan</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Bio Section -->
-            <div class="mb-3">
-                <h1 class="font-bold text-sm md:text-base flex items-center gap-1.5">
-                    <span id="profile-name">Tanveer Hussain</span> 
-                    <span class="text-igblue text-xs" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
-                    <span id="ai-creator-badge" class="bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded font-normal">AI Creator</span>
-                </h1>
-                <p class="text-xs md:text-sm mt-0.5 whitespace-pre-line text-gray-300" id="profile-profession-bio">Web Designer & Frontend Dev
-Karachi, Pakistan</p>
             </div>
 
             <!-- Music / Audio Badge Bar -->
-            <div class="flex items-center space-x-2 mb-4 overflow-x-auto no-scrollbar py-1">
-                <div onclick="playAudioTrack('Jhol · Revel')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 transition px-3 py-1.5 rounded-full flex items-center space-x-2 text-xs cursor-pointer shrink-0">
+            <div class="flex items-center space-x-2 mb-6 overflow-x-auto no-scrollbar py-1">
+                <div onclick="playAudioTrack('Jhol · Revel')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 transition px-3.5 py-2 rounded-full flex items-center space-x-2 text-xs cursor-pointer shrink-0">
                     <i class="fa-solid fa-music text-igblue animate-pulse"></i>
                     <span class="font-medium" id="audio-badge-text">Jhol · Revel</span>
                 </div>
-                <div onclick="openAddAudioModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 transition px-3 py-1.5 rounded-full flex items-center space-x-1.5 text-xs cursor-pointer shrink-0">
+                <div onclick="openAddAudioModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 transition px-3.5 py-2 rounded-full flex items-center space-x-1.5 text-xs cursor-pointer shrink-0">
                     <i class="fa-solid fa-plus text-xs"></i>
                     <span class="font-medium">Add track</span>
                 </div>
             </div>
 
             <!-- Professional Dashboard Banner -->
-            <div class="bg-[var(--card-bg)] border border-[var(--border-col)] rounded-xl p-3 mb-4 cursor-pointer hover:opacity-90 transition" onclick="switchView('dashboard')">
+            <div class="bg-[var(--card-bg)] border border-[var(--border-col)] rounded-2xl p-4 mb-6 cursor-pointer hover:opacity-90 transition" onclick="switchView('dashboard')">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="font-semibold text-xs md:text-sm flex items-center gap-2">
-                            Professional dashboard <span class="bg-green-500/20 text-green-400 text-[10px] px-1.5 py-0.5 rounded">Active</span>
+                        <h2 class="font-semibold text-sm flex items-center gap-2">
+                            Professional dashboard <span class="bg-green-500/20 text-green-400 text-[10px] px-2 py-0.5 rounded">Active</span>
                         </h2>
-                        <p class="text-[11px] md:text-xs text-green-400 mt-0.5 flex items-center gap-1">
+                        <p class="text-xs text-green-400 mt-1 flex items-center gap-1">
                             <i class="fa-solid fa-arrow-trend-up"></i> <span id="dash-views-count">1,420</span> views in the last 30 days.
                         </p>
                     </div>
-                    <i class="fa-solid fa-chevron-right text-xs"></i>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="grid grid-cols-3 gap-2 mb-6">
-                <button onclick="switchView('edit-profile')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3 rounded-lg text-center">
-                    Edit profile
-                </button>
-                <button onclick="shareProfileLink()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3 rounded-lg text-center">
-                    Share profile
-                </button>
-                <button onclick="openRearrangeGridModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3 rounded-lg text-center text-igblue">
-                    Rearrange Grid
-                </button>
-            </div>
-
-            <!-- Story Highlights -->
-            <div class="flex space-x-4 mb-6 overflow-x-auto no-scrollbar pb-2">
-                <div class="flex flex-col items-center shrink-0 cursor-pointer group" onclick="openCreateHighlightModal()">
-                    <div class="w-16 h-16 rounded-full border border-[var(--border-col)] bg-[var(--card-bg)] flex items-center justify-center">
-                        <i class="fa-solid fa-plus text-xl"></i>
-                    </div>
-                    <span class="text-[11px] mt-1 font-medium">New</span>
-                </div>
-                <div class="flex flex-col items-center shrink-0 cursor-pointer" onclick="openStoryViewer('Mindset', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80')">
-                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 to-purple-600">
-                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover rounded-full border-2 border-black">
-                    </div>
-                    <span class="text-[11px] mt-1 truncate w-16 text-center">Mindset</span>
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
                 </div>
             </div>
 
             <!-- Profile Navigation Tabs -->
-            <div class="flex border-t border-[var(--border-col)] justify-around">
-                <button onclick="switchProfileTab('grid')" id="tab-grid" class="flex-1 py-3 text-center border-t-2 border-igblue text-igblue transition flex justify-center items-center text-lg">
-                    <i class="fa-solid fa-table-cells"></i>
+            <div class="flex border-t border-[var(--border-col)] justify-around text-xs tracking-widest font-semibold uppercase">
+                <button onclick="switchProfileTab('grid')" id="tab-grid" class="flex-1 py-3 text-center border-t-2 border-igblue text-igblue transition flex justify-center items-center space-x-2">
+                    <i class="fa-solid fa-table-cells text-base"></i><span>Posts</span>
                 </button>
-                <button onclick="switchView('reels-feed')" id="tab-reels" class="flex-1 py-3 text-center border-t-2 border-transparent text-gray-400 hover:text-white transition flex justify-center items-center text-lg">
-                    <i class="fa-solid fa-clapperboard"></i>
+                <button onclick="switchView('reels-feed')" id="tab-reels" class="flex-1 py-3 text-center border-t-2 border-transparent text-gray-400 hover:text-white transition flex justify-center items-center space-x-2">
+                    <i class="fa-solid fa-clapperboard text-base"></i><span>Reels</span>
                 </button>
-                <button onclick="switchProfileTab('tagged')" id="tab-tagged" class="flex-1 py-3 text-center border-t-2 border-transparent text-gray-400 hover:text-white transition flex justify-center items-center text-lg">
-                    <i class="fa-regular fa-id-badge"></i>
+                <button onclick="switchProfileTab('tagged')" id="tab-tagged" class="flex-1 py-3 text-center border-t-2 border-transparent text-gray-400 hover:text-white transition flex justify-center items-center space-x-2">
+                    <i class="fa-regular fa-id-badge text-base"></i><span>Tagged</span>
                 </button>
             </div>
 
             <!-- Tab Content: Posts Grid -->
-            <div id="content-grid" class="grid grid-cols-3 gap-0.5 pb-16"></div>
+            <div id="content-grid" class="grid grid-cols-3 gap-1 md:gap-4 pt-2 pb-16"></div>
 
             <!-- Tab Content: Tagged -->
             <div id="content-tagged" class="hidden py-16 text-center text-gray-400 pb-20">
@@ -234,19 +213,19 @@ Karachi, Pakistan</p>
         </div>
 
         <!-- ================= VIEW 3: EXPLORE GRID ================= -->
-        <div id="view-explore" class="app-view hidden px-1 pt-2 pb-20">
-            <div class="mb-3 px-2">
+        <div id="view-explore" class="app-view hidden py-4 max-w-3xl mx-auto">
+            <div class="mb-4">
                 <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-sm"></i>
-                    <input type="text" placeholder="Search accounts, tags & inspiration..." class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-xl pl-9 pr-4 py-2.5 text-xs focus:outline-none focus:border-igblue">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400 text-sm"></i>
+                    <input type="text" placeholder="Search accounts, tags & inspiration..." class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-xl pl-10 pr-4 py-3 text-xs focus:outline-none focus:border-igblue">
                 </div>
             </div>
-            <div class="grid grid-cols-3 gap-0.5" id="explore-grid"></div>
+            <div class="grid grid-cols-3 gap-1 md:gap-4" id="explore-grid"></div>
         </div>
 
         <!-- ================= VIEW 4: REELS FEED MODE ================= -->
-        <div id="view-reels-feed" class="app-view hidden px-0 pt-0 pb-16">
-            <div class="relative h-[84vh] w-full bg-black flex flex-col justify-between p-4 overflow-hidden">
+        <div id="view-reels-feed" class="app-view hidden py-4 max-w-md mx-auto">
+            <div class="relative h-[80vh] w-full bg-black rounded-2xl flex flex-col justify-between p-4 overflow-hidden border border-[var(--border-col)]">
                 <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-20">
                     <button onclick="switchView('profile')" class="text-white text-lg"><i class="fa-solid fa-arrow-left"></i></button>
                     <span class="font-bold text-lg text-white">Reels</span>
@@ -294,7 +273,7 @@ Karachi, Pakistan</p>
         </div>
 
         <!-- ================= VIEW 5: PROFESSIONAL DASHBOARD ================= -->
-        <div id="view-dashboard" class="app-view hidden px-4 pt-4 pb-20">
+        <div id="view-dashboard" class="app-view hidden py-6 max-w-xl mx-auto">
             <div class="flex items-center justify-between pb-4 border-b border-[var(--border-col)]">
                 <button onclick="switchView('profile')" class="text-lg"><i class="fa-solid fa-arrow-left"></i></button>
                 <h3 class="font-bold text-base">Insights & Analytics</h3>
@@ -302,13 +281,13 @@ Karachi, Pakistan</p>
             </div>
 
             <div class="py-6 space-y-5">
-                <div class="bg-[var(--card-bg)] border border-[var(--border-col)] p-4 rounded-2xl">
+                <div class="bg-[var(--card-bg)] border border-[var(--border-col)] p-5 rounded-2xl">
                     <span class="text-xs text-gray-400 uppercase font-semibold">Overview (Last 30 Days)</span>
                     <div class="text-2xl font-bold mt-1 text-green-400"><span id="dash-total-views">1,420</span> views</div>
                     <p class="text-xs text-gray-300 mt-1">↑ 34% more than previous period</p>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-4">
                     <div class="bg-[var(--card-bg)] border border-[var(--border-col)] p-4 rounded-2xl">
                         <span class="text-xs text-gray-400">Accounts Reached</span>
                         <div class="text-xl font-bold mt-1" id="dash-reach-count">924</div>
@@ -324,8 +303,8 @@ Karachi, Pakistan</p>
         </div>
 
         <!-- ================= VIEW 6: NOTIFICATIONS ================= -->
-        <div id="view-notifications" class="app-view hidden px-4 pt-4 pb-20">
-            <div class="flex items-center justify-between pb-4 border-b border-[var(--border-col)] mb-3">
+        <div id="view-notifications" class="app-view hidden py-6 max-w-xl mx-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-[var(--border-col)] mb-4">
                 <button onclick="switchView('profile')" class="text-lg flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left"></i> <span class="text-sm font-semibold">Notifications</span>
                 </button>
@@ -353,19 +332,19 @@ Karachi, Pakistan</p>
         </div>
 
         <!-- ================= VIEW 7: POST DETAIL PAGE ================= -->
-        <div id="view-post-detail" class="app-view hidden px-2 pt-2 pb-20">
-            <div class="flex items-center justify-between py-2 px-2 border-b border-[var(--border-col)] mb-2">
+        <div id="view-post-detail" class="app-view hidden py-6 max-w-xl mx-auto">
+            <div class="flex items-center justify-between py-2 px-2 border-b border-[var(--border-col)] mb-4">
                 <button onclick="switchView('profile')" class="text-lg flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left"></i> <span class="text-sm font-semibold">Posts</span>
                 </button>
                 <span class="font-bold text-sm" id="post-detail-username">vexornull</span>
                 <i class="fa-solid fa-ellipsis cursor-pointer" onclick="openPostMenu()"></i>
             </div>
-            <div id="post-detail-container" class="bg-[var(--card-bg)] rounded-xl border border-[var(--border-col)] overflow-hidden"></div>
+            <div id="post-detail-container" class="bg-[var(--card-bg)] rounded-2xl border border-[var(--border-col)] overflow-hidden"></div>
         </div>
 
         <!-- ================= VIEW 8: EDIT PROFILE PAGE ================= -->
-        <div id="view-edit-profile" class="app-view hidden px-4 pt-4 pb-20">
+        <div id="view-edit-profile" class="app-view hidden py-6 max-w-xl mx-auto">
             <div class="flex items-center justify-between pb-4 border-b border-[var(--border-col)]">
                 <button onclick="switchView('profile')" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
                 <h3 class="font-bold text-base">Edit profile</h3>
@@ -410,11 +389,11 @@ Karachi, Pakistan</p>
 
     </main>
 
-    <!-- Bottom Navbar -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-[var(--bg-main)]/95 backdrop-blur-md border-t border-[var(--border-col)] py-3 px-6 flex justify-between items-center z-40 max-w-md md:max-w-2xl mx-auto">
-        <a href="#" onclick="switchView('home')" id="nav-icon-home" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-house"></i></a>
-        <a href="#" onclick="switchView('explore')" id="nav-icon-explore" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <a href="#" onclick="switchView('reels-feed')" id="nav-icon-reels" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-clapperboard"></i></a>
+    <!-- Mobile Bottom Navbar -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--bg-main)]/95 backdrop-blur-md border-t border-[var(--border-col)] py-3 px-6 flex justify-between items-center z-40">
+        <a href="#" onclick="switchView('home')" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-house"></i></a>
+        <a href="#" onclick="switchView('explore')" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="#" onclick="switchView('reels-feed')" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-solid fa-clapperboard"></i></a>
         <a href="#" onclick="openCreatePostModal()" class="text-xl text-gray-400 hover:text-white transition"><i class="fa-regular fa-square-plus"></i></a>
         <div class="w-7 h-7 rounded-full overflow-hidden border-2 border-white cursor-pointer" onclick="switchView('profile')">
             <img id="nav-avatar" src="" class="w-full h-full object-cover">
@@ -427,7 +406,7 @@ Karachi, Pakistan</p>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-4 py-2 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50 border border-gray-700">
+    <div id="toast" class="fixed bottom-24 md:bottom-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-4 py-2 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50 border border-gray-700">
         Action completed
     </div>
 
@@ -499,7 +478,7 @@ Karachi, Pakistan</p>
         };
 
         function loadStorage() {
-            const saved = localStorage.getItem('vexornull_ig_pro_3');
+            const saved = localStorage.getItem('vexornull_ig_pro_4');
             if (saved) {
                 try { appData = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -507,12 +486,13 @@ Karachi, Pakistan</p>
                 document.documentElement.classList.remove('dark');
                 document.documentElement.classList.add('light');
                 document.getElementById('theme-icon').className = "fa-solid fa-sun text-base hover:text-igblue transition";
+                document.getElementById('desktop-theme-icon').className = "fa-solid fa-sun text-xl w-6";
             }
             renderAll();
         }
 
         function saveStorage() {
-            localStorage.setItem('vexornull_ig_pro_3', JSON.stringify(appData));
+            localStorage.setItem('vexornull_ig_pro_4', JSON.stringify(appData));
         }
 
         function toggleTheme() {
@@ -521,11 +501,13 @@ Karachi, Pakistan</p>
                 document.documentElement.classList.add('light');
                 appData.theme = 'light';
                 document.getElementById('theme-icon').className = "fa-solid fa-sun text-base hover:text-igblue transition";
+                document.getElementById('desktop-theme-icon').className = "fa-solid fa-sun text-xl w-6";
             } else {
                 document.documentElement.classList.remove('light');
                 document.documentElement.classList.add('dark');
                 appData.theme = 'dark';
                 document.getElementById('theme-icon').className = "fa-solid fa-moon text-base hover:text-igblue transition";
+                document.getElementById('desktop-theme-icon').className = "fa-solid fa-moon text-xl w-6";
             }
             saveStorage();
             showToast("Theme updated!");
@@ -533,12 +515,14 @@ Karachi, Pakistan</p>
 
         function renderAll() {
             document.getElementById('header-username').innerText = appData.profile.username;
+            document.getElementById('sidebar-username').innerText = appData.profile.username;
             document.getElementById('profile-name').innerText = appData.profile.name;
             document.getElementById('profile-profession-bio').innerText = appData.profile.bio;
             document.getElementById('profile-note-text').innerText = appData.profile.note;
             document.getElementById('audio-badge-text').innerText = appData.profile.audio;
             
             document.getElementById('profile-avatar').src = appData.profile.avatar;
+            document.getElementById('sidebar-avatar').src = appData.profile.avatar;
             document.getElementById('nav-avatar').src = appData.profile.avatar;
             document.getElementById('edit-avatar-preview').src = appData.profile.avatar;
             document.getElementById('home-story-avatar').src = appData.profile.avatar;
@@ -550,7 +534,6 @@ Karachi, Pakistan</p>
             document.getElementById('reel-username').innerText = appData.profile.username;
             document.getElementById('reel-audio-title').innerText = appData.profile.audio;
 
-            // AI Badge Visibility
             const aiBadgeEl = document.getElementById('ai-creator-badge');
             if(appData.profile.showAiBadge) {
                 aiBadgeEl.classList.remove('hidden');
@@ -558,7 +541,6 @@ Karachi, Pakistan</p>
                 aiBadgeEl.classList.add('hidden');
             }
 
-            // Edit Profile Inputs
             document.getElementById('input-name').value = appData.profile.name;
             document.getElementById('input-username').value = appData.profile.username;
             document.getElementById('input-bio').value = appData.profile.bio;
@@ -569,19 +551,19 @@ Karachi, Pakistan</p>
             // Render Home Stream
             const homeContainer = document.getElementById('home-posts-container');
             homeContainer.innerHTML = appData.posts.map(p => `
-                <div class="bg-[var(--card-bg)] border border-[var(--border-col)] mb-4 md:rounded-xl">
-                    <div class="flex items-center justify-between px-3 py-2">
-                        <div class="flex items-center space-x-2.5">
+                <div class="bg-[var(--card-bg)] border border-[var(--border-col)] mb-6 rounded-xl overflow-hidden">
+                    <div class="flex items-center justify-between px-4 py-3">
+                        <div class="flex items-center space-x-3">
                             <img src="${appData.profile.avatar}" class="w-8 h-8 rounded-full object-cover border border-[var(--border-col)]">
                             <span class="font-semibold text-xs">${appData.profile.username}</span>
                         </div>
                         <i class="fa-solid fa-ellipsis text-xs cursor-pointer" onclick="openPostMenu()"></i>
                     </div>
-                    <div class="bg-black aspect-square cursor-pointer relative overflow-hidden" onclick="openPostDetail(${p.id})">
+                    <div class="bg-black aspect-square cursor-pointer relative overflow-hidden flex items-center justify-center" onclick="openPostDetail(${p.id})">
                         <img src="${p.images[0]}" class="w-full h-full object-cover">
-                        ${p.images.length > 1 ? '<span class="absolute top-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded-full"><i class="fa-regular fa-clone"></i></span>' : ''}
+                        ${p.images.length > 1 ? '<span class="absolute top-3 right-3 bg-black/70 text-white text-[10px] px-2.5 py-1 rounded-full"><i class="fa-regular fa-clone"></i></span>' : ''}
                     </div>
-                    <div class="p-3 space-y-2">
+                    <div class="p-4 space-y-2.5">
                         <div class="flex justify-between items-center text-xl">
                             <div class="flex space-x-4">
                                 <button onclick="togglePostLike(${p.id}, this)" class="hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
@@ -601,14 +583,13 @@ Karachi, Pakistan</p>
             // Render Profile Grid
             const grid = document.getElementById('content-grid');
             grid.innerHTML = appData.posts.map(p => `
-                <div class="relative aspect-square bg-[var(--card-bg)] cursor-pointer group overflow-hidden" onclick="openPostDetail(${p.id})">
+                <div class="relative aspect-square bg-[var(--card-bg)] cursor-pointer group overflow-hidden rounded-md" onclick="openPostDetail(${p.id})">
                     <img src="${p.images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    ${p.isReel ? `<div class="absolute top-2 right-2 text-white text-xs"><i class="fa-solid fa-play"></i></div>` : ''}
-                    ${p.images.length > 1 ? `<div class="absolute top-2 right-2 text-white text-xs"><i class="fa-regular fa-clone"></i></div>` : ''}
+                    ${p.isReel ? `<div class="absolute top-2 right-2 text-white text-xs drop-shadow"><i class="fa-solid fa-play"></i></div>` : ''}
+                    ${p.images.length > 1 ? `<div class="absolute top-2 right-2 text-white text-xs drop-shadow"><i class="fa-regular fa-clone"></i></div>` : ''}
                 </div>
             `).join('');
 
-            // Dashboard View Metrics
             const totalViews = appData.posts.reduce((acc, curr) => acc + curr.views, 0);
             document.getElementById('dash-views-count').innerText = totalViews.toLocaleString();
             document.getElementById('dash-total-views').innerText = totalViews.toLocaleString();
@@ -810,34 +791,6 @@ Karachi, Pakistan</p>
             }
         }
 
-        function openAlgorithmControlModal() {
-            const modal = document.getElementById('app-modal');
-            const content = document.getElementById('modal-content');
-            content.innerHTML = `
-                <div class="p-4 border-b border-[var(--border-col)] flex justify-between items-center">
-                    <h3 class="font-bold text-sm">Your Algorithm Topics</h3>
-                    <button onclick="closeModal()"><i class="fa-solid fa-xmark text-lg"></i></button>
-                </div>
-                <div class="p-4 space-y-3">
-                    <p class="text-[11px] text-gray-400">Manage topics that shape your explore and Reels feed preferences.</p>
-                    ${appData.algorithmTopics.map((topic, idx) => `
-                        <div class="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border-col)] px-3 py-2.5 rounded-xl cursor-pointer" onclick="toggleAlgorithmTopic(${idx})">
-                            <span class="text-xs font-medium">${topic.name}</span>
-                            <span class="text-xs font-semibold px-3 py-1 rounded-lg ${topic.active ? 'bg-igblue text-white' : 'bg-gray-700 text-gray-300'}">${topic.active ? 'Prioritized' : 'Standard'}</span>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-            modal.classList.remove('hidden');
-        }
-
-        function toggleAlgorithmTopic(idx) {
-            appData.algorithmTopics[idx].active = !appData.algorithmTopics[idx].active;
-            saveStorage();
-            openAlgorithmControlModal();
-            showToast("Algorithm feed updated!");
-        }
-
         function openDirectMessagesDrawer() {
             const modal = document.getElementById('app-modal');
             const content = document.getElementById('modal-content');
@@ -857,21 +810,8 @@ Karachi, Pakistan</p>
                         </div>
                     `).join('')}
                 </div>
-                <div class="p-3 border-t border-[var(--border-col)] flex gap-2">
-                    <input type="text" id="quick-dm-input" placeholder="Type a message..." class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs rounded-lg px-3 py-2 flex-1 focus:outline-none">
-                    <button onclick="sendQuickDm()" class="bg-igblue text-white text-xs font-semibold px-3 py-2 rounded-lg">Send</button>
-                </div>
             `;
             modal.classList.remove('hidden');
-        }
-
-        function sendQuickDm() {
-            const input = document.getElementById('quick-dm-input');
-            if(input.value.trim()) {
-                showToast("Message sent successfully!");
-                input.value = "";
-                closeModal();
-            }
         }
 
         function openRearrangeGridModal() {
@@ -945,7 +885,6 @@ Karachi, Pakistan</p>
                 <div class="p-2 space-y-1 text-sm">
                     <button onclick="closeModal(); toggleTheme()" class="w-full text-left px-4 py-3 hover:opacity-75 rounded-lg flex items-center space-x-3"><i class="fa-solid fa-circle-half-stroke text-igblue"></i><span>Toggle Dark/Light Mode</span></button>
                     <button onclick="closeModal(); switchView('dashboard')" class="w-full text-left px-4 py-3 hover:opacity-75 rounded-lg flex items-center space-x-3"><i class="fa-solid fa-chart-line text-igblue"></i><span>Professional Dashboard</span></button>
-                    <button onclick="closeModal(); openAlgorithmControlModal()" class="w-full text-left px-4 py-3 hover:opacity-75 rounded-lg flex items-center space-x-3"><i class="fa-solid fa-sliders text-igblue"></i><span>Your Algorithm Settings</span></button>
                     <button onclick="closeModal(); switchView('edit-profile')" class="w-full text-left px-4 py-3 hover:opacity-75 rounded-lg flex items-center space-x-3"><i class="fa-regular fa-user"></i><span>Edit Profile</span></button>
                 </div>
             `;
@@ -1005,10 +944,6 @@ Karachi, Pakistan</p>
                 renderAll();
                 showToast("Note updated!");
             }
-        }
-
-        function openCreateHighlightModal() {
-            showToast("Highlight creator opened");
         }
 
         function openAddAudioModal() {
