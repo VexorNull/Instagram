@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanveer Hussain (@vexornull) • Instagram Pro 6.0</title>
+    <title>Tanveer Hussain (@vexornull) • Instagram Pro 6.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -46,6 +46,7 @@
         @keyframes floatUp {
             0% { transform: scale(0.3) translateY(0); opacity: 1; }
             100% { transform: scale(1.4) translateY(-80px); opacity: 0; }
+        }
         .animate-float { animation: floatUp 0.8s ease-out forwards; }
     </style>
 </head>
@@ -134,38 +135,55 @@
                 </div>
             </div>
 
-            <!-- Profile Header Row -->
-            <div class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-12 mb-6">
-                <div class="relative cursor-pointer mx-auto md:mx-0" onclick="openStoryViewer('Tanveer Hussain', appData.profile.avatar)">
-                    <div class="w-24 h-24 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
+            <!-- Profile Header Row (Properly aligned avatar on left, details on right) -->
+            <div class="flex items-center space-x-6 md:space-x-14 mb-6">
+                <!-- Avatar Column -->
+                <div class="relative cursor-pointer shrink-0" onclick="openStoryViewer('Tanveer Hussain', appData.profile.avatar)">
+                    <div class="w-20 h-20 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
                         <img id="profile-avatar" src="" alt="Tanveer Hussain" class="w-full h-full object-cover rounded-full border-2 border-black">
                     </div>
-                    <div class="absolute bottom-1 right-1 bg-[#0095f6] text-white rounded-full w-7 h-7 flex items-center justify-center text-sm border-2 border-black font-bold">+</div>
+                    <div class="absolute bottom-1 right-1 bg-[#0095f6] text-white rounded-full w-6 h-6 md:w-7 md:h-7 flex items-center justify-center text-xs md:text-sm border-2 border-black font-bold">+</div>
                 </div>
 
-                <div class="flex-1 w-full space-y-4">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <!-- Info Column -->
+                <div class="flex-1 space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <div class="flex items-center gap-2 flex-wrap">
-                            <h1 class="font-bold text-lg md:text-xl" id="profile-name">Tanveer Hussain</h1>
-                            <span class="text-igblue text-sm" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
+                            <h1 class="font-bold text-base md:text-xl" id="profile-name">Tanveer Hussain</h1>
+                            <span class="text-igblue text-xs md:text-sm" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
                             <span id="ai-creator-badge" class="bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded font-normal">AI Creator</span>
-                        </div>
-                        <div class="flex items-center space-x-2 flex-wrap gap-y-2">
-                            <button onclick="switchView('edit-profile')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3.5 rounded-lg">Edit profile</button>
-                            <button onclick="shareProfileLink()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3.5 rounded-lg">Share profile</button>
-                            <button onclick="openRearrangeGridModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3.5 rounded-lg text-igblue">Rearrange Grid</button>
                         </div>
                     </div>
 
-                    <div class="flex space-x-8 text-sm">
+                    <!-- Action Buttons -->
+                    <div class="flex items-center space-x-2 flex-wrap gap-y-2">
+                        <button onclick="switchView('edit-profile')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-1.5 px-3 rounded-lg">Edit profile</button>
+                        <button onclick="shareProfileLink()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-1.5 px-3 rounded-lg">Share profile</button>
+                        <button onclick="openRearrangeGridModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-1.5 px-3 rounded-lg text-igblue">Rearrange Grid</button>
+                    </div>
+
+                    <!-- Desktop / Tablet Stats -->
+                    <div class="hidden sm:flex space-x-6 text-sm pt-1">
                         <div><span class="font-bold" id="stat-posts-count">5</span> posts</div>
                         <div class="cursor-pointer" onclick="openUserListModal('followers')"><span class="font-bold" id="stat-followers">482</span> followers</div>
                         <div class="cursor-pointer" onclick="openUserListModal('following')"><span class="font-bold" id="stat-following">160</span> following</div>
                     </div>
 
-                    <div>
+                    <div class="hidden sm:block">
                         <p class="text-xs md:text-sm whitespace-pre-line text-gray-300" id="profile-profession-bio">Web Designer & Frontend Dev\nKarachi, Pakistan</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Mobile Bio & Stats Row -->
+            <div class="block sm:hidden space-y-2 mb-6">
+                <div>
+                    <p class="text-xs whitespace-pre-line text-gray-300" id="profile-profession-bio-mobile">Web Designer & Frontend Dev\nKarachi, Pakistan</p>
+                </div>
+                <div class="flex justify-around border-y border-[var(--border-col)] py-3 text-xs text-center">
+                    <div><span class="font-bold block text-sm" id="stat-posts-count-mob">5</span> posts</div>
+                    <div class="cursor-pointer" onclick="openUserListModal('followers')"><span class="font-bold block text-sm" id="stat-followers-mob">482</span> followers</div>
+                    <div class="cursor-pointer" onclick="openUserListModal('following')"><span class="font-bold block text-sm" id="stat-following-mob">160</span> following</div>
                 </div>
             </div>
 
@@ -558,6 +576,7 @@
             document.getElementById('sidebar-username').innerText = appData.profile.username;
             document.getElementById('profile-name').innerText = appData.profile.name;
             document.getElementById('profile-profession-bio').innerText = appData.profile.bio;
+            document.getElementById('profile-profession-bio-mobile').innerText = appData.profile.bio;
             document.getElementById('profile-note-text').innerText = appData.profile.note;
             document.getElementById('audio-badge-text').innerText = appData.profile.audio;
             
@@ -569,8 +588,12 @@
             document.getElementById('reel-user-avatar').src = appData.profile.avatar;
 
             document.getElementById('stat-posts-count').innerText = appData.posts.length;
+            document.getElementById('stat-posts-count-mob').innerText = appData.posts.length;
             document.getElementById('stat-followers').innerText = appData.profile.followers;
+            document.getElementById('stat-followers-mob').innerText = appData.profile.followers;
             document.getElementById('stat-following').innerText = appData.profile.following;
+            document.getElementById('stat-following-mob').innerText = appData.profile.following;
+
             document.getElementById('reel-username').innerText = appData.profile.username;
             document.getElementById('reel-audio-title').innerText = appData.profile.audio;
 
