@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanveer Hussain (@vexornull) • Instagram Pro 4.0</title>
+    <title>Tanveer Hussain (@vexornull) • Instagram Pro 5.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -51,7 +51,7 @@
     <aside class="hidden md:flex flex-col justify-between w-64 border-r border-[var(--border-col)] p-4 fixed h-screen z-40 bg-[var(--bg-main)]">
         <div class="space-y-6">
             <div class="flex items-center space-x-2 px-3 py-2 cursor-pointer" onclick="switchView('profile')">
-                <span class="font-bold text-xl tracking-tight italic font-serif">Instagram</span>
+                <span class="font-bold text-2xl tracking-tight italic font-serif">Instagram</span>
             </div>
             <nav class="space-y-2 text-sm font-medium">
                 <a href="#" onclick="switchView('home')" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-white/10 transition"><i class="fa-solid fa-house text-xl w-6"></i><span>Home</span></a>
@@ -90,8 +90,8 @@
         </div>
     </header>
 
-    <!-- Main Content Area (Fluid / Responsive Container) -->
-    <main class="flex-1 md:ml-64 min-h-screen pb-24 md:pb-12 px-2 md:px-12 max-w-4xl mx-auto">
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-64 min-h-screen pb-24 md:pb-12 px-3 md:px-12 max-w-4xl mx-auto">
 
         <!-- ================= VIEW 1: HOME FEED ================= -->
         <div id="view-home" class="app-view hidden py-4 max-w-xl mx-auto">
@@ -117,14 +117,14 @@
         <div id="view-profile" class="app-view py-6 max-w-3xl mx-auto">
             
             <!-- First Note Bubble -->
-            <div class="mb-4 relative w-44 cursor-pointer" onclick="openEditNoteModal()">
+            <div class="mb-4 relative w-48 cursor-pointer" onclick="openEditNoteModal()">
                 <div class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs px-3.5 py-2 rounded-2xl text-center shadow-md relative inline-block whitespace-nowrap">
                     <span id="profile-note-text">First note of the week...</span>
                     <div class="absolute -bottom-1 left-4 w-2 h-2 bg-[var(--card-bg)] rotate-45 border-r border-b border-[var(--border-col)]"></div>
                 </div>
             </div>
 
-            <!-- Profile Header Row (Optimized for Desktop & Mobile) -->
+            <!-- Profile Header Row -->
             <div class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-12 mb-6">
                 <div class="relative cursor-pointer mx-auto md:mx-0" onclick="openStoryViewer('Tanveer Hussain', appData.profile.avatar)">
                     <div class="w-24 h-24 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
@@ -140,10 +140,10 @@
                             <span class="text-igblue text-sm" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
                             <span id="ai-creator-badge" class="bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded font-normal">AI Creator</span>
                         </div>
-                        <div class="flex items-center space-x-2">
-                            <button onclick="switchView('edit-profile')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-4 rounded-lg">Edit profile</button>
-                            <button onclick="shareProfileLink()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-4 rounded-lg">Share profile</button>
-                            <button onclick="openRearrangeGridModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-4 rounded-lg text-igblue">Rearrange Grid</button>
+                        <div class="flex items-center space-x-2 flex-wrap gap-y-2">
+                            <button onclick="switchView('edit-profile')" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3.5 rounded-lg">Edit profile</button>
+                            <button onclick="shareProfileLink()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3.5 rounded-lg">Share profile</button>
+                            <button onclick="openRearrangeGridModal()" class="bg-[var(--card-bg)] border border-[var(--border-col)] hover:opacity-80 font-semibold text-xs py-2 px-3.5 rounded-lg text-igblue">Rearrange Grid</button>
                         </div>
                     </div>
 
@@ -214,10 +214,16 @@
 
         <!-- ================= VIEW 3: EXPLORE GRID ================= -->
         <div id="view-explore" class="app-view hidden py-4 max-w-3xl mx-auto">
-            <div class="mb-4">
+            <div class="mb-4 space-y-3">
                 <div class="relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400 text-sm"></i>
-                    <input type="text" placeholder="Search accounts, tags & inspiration..." class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-xl pl-10 pr-4 py-3 text-xs focus:outline-none focus:border-igblue">
+                    <input type="text" id="explore-search-input" oninput="filterExplore(this.value)" placeholder="Search accounts, tags & inspiration..." class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-xl pl-10 pr-4 py-3 text-xs focus:outline-none focus:border-igblue">
+                </div>
+                <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
+                    <button onclick="filterTopic('all')" class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-white/10 transition">All</button>
+                    <button onclick="filterTopic('Web Dev')" class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-white/10 transition">Web Dev</button>
+                    <button onclick="filterTopic('UI/UX')" class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-white/10 transition">UI/UX</button>
+                    <button onclick="filterTopic('Golf')" class="bg-[var(--card-bg)] border border-[var(--border-col)] text-xs px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-white/10 transition">Golf</button>
                 </div>
             </div>
             <div class="grid grid-cols-3 gap-1 md:gap-4" id="explore-grid"></div>
@@ -464,11 +470,13 @@
                     audio: "Jhol · Revel"
                 }
             ],
-            algorithmTopics: [
-                { name: "Web Development", active: true },
-                { name: "UI/UX Design", active: true },
-                { name: "Golf & Swing", active: true },
-                { name: "Cybersecurity", active: false }
+            exploreItems: [
+                { id: 101, image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80", topic: "Web Dev" },
+                { id: 102, image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80", topic: "UI/UX" },
+                { id: 103, image: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=600&q=80", topic: "Golf" },
+                { id: 104, image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80", topic: "Web Dev" },
+                { id: 105, image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80", topic: "UI/UX" },
+                { id: 106, image: "https://images.unsplash.com/photo-1593111774642-a1309489f660?auto=format&fit=crop&w=600&q=80", topic: "Golf" }
             ],
             messages: [
                 { user: "sarah_ui", text: "Loved your recent web UI layout! 🔥", time: "2h", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
@@ -478,7 +486,7 @@
         };
 
         function loadStorage() {
-            const saved = localStorage.getItem('vexornull_ig_pro_4');
+            const saved = localStorage.getItem('vexornull_ig_pro_5');
             if (saved) {
                 try { appData = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -492,7 +500,7 @@
         }
 
         function saveStorage() {
-            localStorage.setItem('vexornull_ig_pro_4', JSON.stringify(appData));
+            localStorage.setItem('vexornull_ig_pro_5', JSON.stringify(appData));
         }
 
         function toggleTheme() {
@@ -561,7 +569,7 @@
                     </div>
                     <div class="bg-black aspect-square cursor-pointer relative overflow-hidden flex items-center justify-center" onclick="openPostDetail(${p.id})">
                         <img src="${p.images[0]}" class="w-full h-full object-cover">
-                        ${p.images.length > 1 ? '<span class="absolute top-3 right-3 bg-black/70 text-white text-[10px] px-2.5 py-1 rounded-full"><i class="fa-regular fa-clone"></i></span>' : ''}
+                        ${p.images.length > 1 ? '<span class="absolute top-3 right-3 bg-black/70 text-white text-[10px] px-2.5 py-1 rounded-full"><i class="fa-regular fa-clone"></i> ' + p.images.length + '</span>' : ''}
                     </div>
                     <div class="p-4 space-y-2.5">
                         <div class="flex justify-between items-center text-xl">
@@ -590,6 +598,8 @@
                 </div>
             `).join('');
 
+            renderExploreGrid(appData.exploreItems);
+
             const totalViews = appData.posts.reduce((acc, curr) => acc + curr.views, 0);
             document.getElementById('dash-views-count').innerText = totalViews.toLocaleString();
             document.getElementById('dash-total-views').innerText = totalViews.toLocaleString();
@@ -599,6 +609,34 @@
                 document.getElementById('reel-bg-img').src = reelPosts[0].images[0];
                 document.getElementById('reel-caption').innerText = reelPosts[0].caption;
             }
+        }
+
+        function renderExploreGrid(items) {
+            const expGrid = document.getElementById('explore-grid');
+            expGrid.innerHTML = items.map(item => `
+                <div class="relative aspect-square bg-[var(--card-bg)] cursor-pointer group overflow-hidden rounded-md" onclick="showToast('Explore item selected')">
+                    <img src="${item.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs font-semibold transition">
+                        <i class="fa-solid fa-heart mr-1"></i> 124
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterTopic(topic) {
+            if(topic === 'all') {
+                renderExploreGrid(appData.exploreItems);
+            } else {
+                const filtered = appData.exploreItems.filter(i => i.topic === topic);
+                renderExploreGrid(filtered);
+            }
+            showToast(`Filtered by ${topic}`);
+        }
+
+        function filterExplore(query) {
+            const q = query.toLowerCase();
+            const filtered = appData.exploreItems.filter(i => i.topic.toLowerCase().includes(q));
+            renderExploreGrid(filtered);
         }
 
         function switchView(viewId) {
@@ -641,10 +679,13 @@
             }
         }
 
+        let activeCarouselIndex = {};
+
         function openPostDetail(postId) {
             const post = appData.posts.find(p => p.id === postId);
             if (!post) return;
 
+            activeCarouselIndex[postId] = 0;
             document.getElementById('post-detail-username').innerText = appData.profile.username;
             const container = document.getElementById('post-detail-container');
             
@@ -700,16 +741,15 @@
             switchView('post-detail');
         }
 
-        let currentSlideIndex = 0;
         function nextSlide(postId) {
             const post = appData.posts.find(p => p.id === postId);
-            currentSlideIndex = (currentSlideIndex + 1) % post.images.length;
-            document.getElementById(`carousel-img-${postId}`).src = post.images[currentSlideIndex];
+            activeCarouselIndex[postId] = (activeCarouselIndex[postId] + 1) % post.images.length;
+            document.getElementById(`carousel-img-${postId}`).src = post.images[activeCarouselIndex[postId]];
         }
         function prevSlide(postId) {
             const post = appData.posts.find(p => p.id === postId);
-            currentSlideIndex = (currentSlideIndex - 1 + post.images.length) % post.images.length;
-            document.getElementById(`carousel-img-${postId}`).src = post.images[currentSlideIndex];
+            activeCarouselIndex[postId] = (activeCarouselIndex[postId] - 1 + post.images.length) % post.images.length;
+            document.getElementById(`carousel-img-${postId}`).src = post.images[activeCarouselIndex[postId]];
         }
 
         function togglePostLike(postId, btn) {
@@ -891,7 +931,10 @@
             modal.classList.remove('hidden');
         }
 
+        let tempUploadedImages = [];
+
         function openCreatePostModal() {
+            tempUploadedImages = [];
             const modal = document.getElementById('app-modal');
             const content = document.getElementById('modal-content');
             content.innerHTML = `
@@ -901,9 +944,10 @@
                 </div>
                 <div class="p-4 space-y-4">
                     <div>
-                        <label class="text-xs text-gray-400 uppercase font-semibold">Image URL (Supports Carousel)</label>
-                        <input type="text" id="new-post-img" placeholder="https://images.unsplash.com/..." class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-lg p-3 text-sm mt-1 focus:outline-none focus:border-igblue">
+                        <label class="text-xs text-gray-400 uppercase font-semibold">Upload Images From Device</label>
+                        <input type="file" id="new-post-file-input" accept="image/*" multiple class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-lg p-2 text-xs mt-1 text-gray-300" onchange="handleNewPostFiles(event)">
                     </div>
+                    <div id="upload-preview-strip" class="flex space-x-2 overflow-x-auto min-h-[60px] py-1"></div>
                     <div>
                         <label class="text-xs text-gray-400 uppercase font-semibold">Caption</label>
                         <textarea id="new-post-caption" placeholder="Write a caption..." class="w-full bg-[var(--card-bg)] border border-[var(--border-col)] rounded-lg p-3 text-sm mt-1 focus:outline-none focus:border-igblue h-20"></textarea>
@@ -914,16 +958,39 @@
             modal.classList.remove('hidden');
         }
 
+        function handleNewPostFiles(event) {
+            const files = event.target.files;
+            if(files) {
+                for(let file of files) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        tempUploadedImages.push(e.target.result);
+                        renderUploadPreviews();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        function renderUploadPreviews() {
+            const strip = document.getElementById('upload-preview-strip');
+            if(!strip) return;
+            strip.innerHTML = tempUploadedImages.map((img, idx) => `
+                <div class="relative w-14 h-14 shrink-0 rounded-lg overflow-hidden border border-[var(--border-col)]">
+                    <img src="${img}" class="w-full h-full object-cover">
+                </div>
+            `).join('');
+        }
+
         function addNewPost() {
-            const imgUrl = document.getElementById('new-post-img').value.trim();
             const caption = document.getElementById('new-post-caption').value.trim();
-            if (!imgUrl) {
-                showToast("Please provide an image URL");
+            if (tempUploadedImages.length === 0) {
+                showToast("Please select at least one image file");
                 return;
             }
             appData.posts.unshift({
-                id: appData.posts.length,
-                images: [imgUrl],
+                id: Date.now(),
+                images: [...tempUploadedImages],
                 caption: caption || "New post #vexornull",
                 likes: 1,
                 views: 50,
